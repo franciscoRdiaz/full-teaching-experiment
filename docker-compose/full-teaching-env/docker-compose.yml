@@ -9,6 +9,8 @@ services:
      - MYSQL_DATABASE=full_teaching
      - MYSQL_USER=ft-root
      - MYSQL_PASSWORD=pass
+   networks:
+     - elastest
 
  full-teaching-openvidu-server-kms:
    image: openvidu/openvidu-server-kms:1.7.0
@@ -19,6 +21,8 @@ services:
      - KMS_STUN_PORT=19302
      - openvidu.secret=MY_SECRET
      - openvidu.publicurl=docker
+   networks:
+     - elastest
 
  full-teaching:
    image: codeurjc/full-teaching:${BUG_TAG}
@@ -38,4 +42,10 @@ services:
      - server.port=5001
      - openvidu.url=https://full-teaching-openvidu-server-kms:8443
      - openvidu.secret=MY_SECRET
+   networks:
+     - elastest
+networks:
+    elastest:
+      driver: bridge
+  
 
